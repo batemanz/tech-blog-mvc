@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Post, Comment, User } = require('../models');
-const withAuth = require('../utils/auth');
+const Authorize = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
@@ -19,9 +19,9 @@ router.get('/', async (req, res) => {
 
     // Pass serialized data and session flag into template
     // res render will go to a view
-    res.render('homepage', { 
+    res.render('all-posts-admin', { 
       posts, 
-      logged_in: req.session.logged_in 
+      logged_in: req.session.loggedIn 
     });
   } catch (err) {
     res.status(500).json(err);
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 });
 
 // getting a single post
-router.get('/post/:id', async (req, res) => {
+router.get('/post/:id', Authorize, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
@@ -45,7 +45,7 @@ router.get('/post/:id', async (req, res) => {
 // res render is the view
     res.render('single-post', {
       ...post,
-      logged_in: req.session.logged_in
+      logged_in: req.session.loggedIn
     });
   } catch (err) {
     res.status(500).json(err);
@@ -54,8 +54,8 @@ router.get('/post/:id', async (req, res) => {
 
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
-    res.redirect('/');
+  if (req.session.loggedIn) {
+    res.redirect('/dashboard');
     return;
   }
 
@@ -64,8 +64,8 @@ router.get('/login', (req, res) => {
 
 router.get('/signup', (req, res) => {
   // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
-    res.redirect('/');
+  if (req.session.loggedIn) {
+    res.redirect('/dashboard');
     return;
   }
 
