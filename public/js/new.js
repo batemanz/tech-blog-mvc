@@ -2,10 +2,13 @@ const newFormHandler = async function (event) {
   event.preventDefault();
 //
 //
-//
-  const postTitle = document.querySelector('input[name="postTitle"]').value;
-  const postCont = document.querySelector('textarea[name="postBody"]').value;
 
+  const postTitle = document.querySelector('input[name="postTitle"]').value;
+//
+  const postCont = document.querySelector('textarea[name="postBody"]').value;
+//
+//
+//
   console.log(postTitle);
   console.log(postCont);
 //

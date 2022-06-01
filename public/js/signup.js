@@ -9,7 +9,7 @@ const signupFormHandler = async function (event) {
   const password = document
     .querySelector('#passwordSignup')
     .value.trim();
-  const response = await fetch('/api/user', {
+  const response = await fetch('/api/users', {
     method: 'POST',
     body: JSON.stringify({
       username,
