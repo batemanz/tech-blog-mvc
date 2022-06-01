@@ -1,10 +1,10 @@
-const postId = document.querySelector('input[name="post-id"]').value;
+const postId = document.querySelector('input[name="postId"]').value;
 
 const commentFormHandler = async (event) => {
   event.preventDefault();
 
   const commentCont = document.querySelector(
-    'textarea[name="comment-body"]'
+    'textarea[name="commentBody"]'
   ).value;
 
   if (commentCont) {
@@ -27,5 +27,5 @@ const commentFormHandler = async (event) => {
 };
 
 document
-  .querySelector('#new-comment-form')
+  .querySelector('#newComForm')
   .addEventListener('submit', commentFormHandler);

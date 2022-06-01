@@ -1,9 +1,9 @@
-const postId = document.querySelector('input[name="post-id"]').value;
+const postId = document.querySelector('input[name="postId"]').value;
 const editFormHandler = async (event) => {
   event.preventDefault();
 
-  const postTitle = document.querySelector('input[name="post-title"]').value;
-  const postCont = document.querySelector('textarea[name="post-body"]').value;
+  const postTitle = document.querySelector('input[name="postTitle"]').value;
+  const postCont = document.querySelector('textarea[name="postBody"]').value;
 
   const response = await fetch(`/api/post/${postId}`, {
     method: 'PUT',
@@ -19,7 +19,7 @@ const editFormHandler = async (event) => {
   if (response.ok) {
     document.location.replace('/dashboard');
   } else {
-    alert('Failed to update your post');
+    alert('update post failed');
   }
   document.location.replace('/dashboard');
 };
@@ -33,8 +33,8 @@ const deleteClickHandler = async () => {
 };
 
 document
-  .querySelector('#edit-post-form')
+  .querySelector('#editPostForm')
   .addEventListener('submit', editFormHandler);
 document
-  .querySelector('#delete-btn')
+  .querySelector('#deleteBtn')
   .addEventListener('click', deleteClickHandler);
