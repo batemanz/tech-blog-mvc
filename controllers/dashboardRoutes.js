@@ -5,7 +5,7 @@ const Authorize = require('../utils/auth');
 router.get('/', Authorize, async (req, res) => {
   try {
     const postData = await Post.findAll({
-      where: { userId: req.session.userId },
+      where: { user_id: req.session.user_id },
       include: [User],
     });
     const posts = postData.map((post) => post.get({ plain: true }));
