@@ -1,15 +1,14 @@
 const router = require('express').Router();
-const { Post, Comment, User } = require('../models');
+const { Post } = require('../models');
 const Authorize = require('../utils/auth');
 
 router.get('/', Authorize, async (req, res) => {
   try {
     const postData = await Post.findAll({
       where: { user_id: req.session.user_id },
-      include: [User],
     });
     const posts = postData.map((post) => post.get({ plain: true }));
-    res.render('all-posts', {
+    res.render('all-posts-admin', {
       layout: 'dashboard',
       posts,
     });
@@ -19,7 +18,7 @@ router.get('/', Authorize, async (req, res) => {
   }
 });
 
-router.get('/new', Authorize, async (req, res) => {
+router.get('/new', Authorize, (req, res) => {
   res.render('new-post', {
     layout: 'dashboard'
   });

@@ -7,10 +7,10 @@ router.post('/', Authorize, async (req, res) => {
   console.log(body);
   try {
     const newPost = await Post.create({
-      ...req.body,
+      ...body,
       user_id: req.session.user_id,
     });
-    res.status(200).json(newPost);
+    res.json(newPost);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -18,12 +18,12 @@ router.post('/', Authorize, async (req, res) => {
 
 router.put('/:id', Authorize, async (req, res) => {
   try {
-    const [updatedRows] = await Post.update(req.body, {
+    const [affectedRows] = await Post.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
-    if (updatedRows > 0) {
+    if (affectedRows > 0) {
       res.status(200).end();
     } else {
       res.status(404).end();
@@ -35,12 +35,12 @@ router.put('/:id', Authorize, async (req, res) => {
 
 router.delete('/:id', Authorize, async (req, res) => {
   try {
-    const updatedRows = await Post.destroy({
+    const [affectedRows] = Post.destroy({
       where: {
         id: req.params.id,
       },
     });
-    if (updatedRows > 0) {
+    if (affectedRows > 0) {
       res.status(200).end();
     } else {
       res.status(404).end();
