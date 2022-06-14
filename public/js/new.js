@@ -14,7 +14,7 @@ const newFormHandler = async function (event) {
 //
 //
 //
-  await fetch(`/api/post`, {
+  await fetch(`/api/postRoutes`, {
     method: 'POST',
     body: JSON.stringify({
       title,
