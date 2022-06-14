@@ -2,9 +2,9 @@ const newFormHandler = async (event) => {
 //
 //
 
-  const title = document.querySelector('input[name="title"]').value;
+  const title = document.querySelector('#title').value;
 //
-  const content = document.querySelector('textarea[name="content"]').value;
+  const content = document.querySelector('#body').value;
 //
 //
 //
