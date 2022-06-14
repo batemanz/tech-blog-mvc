@@ -1,5 +1,4 @@
-const newFormHandler = async function (event) {
-  event.preventDefault();
+const newFormHandler = async (event) => {
 //
 //
 
@@ -14,14 +13,20 @@ const newFormHandler = async function (event) {
 //
 //
 //
-  await fetch(`/api/postRoutes`, {
-    method: 'POST',
-    body: JSON.stringify({
-      title,
-      content,
-    }),
-    headers: { 'Content-Type': 'application/json' },
+
+if (title && content) {
+  const response = await fetch("/api/post", {
+    method: "POST",
+    body: JSON.stringify({ title, content }),
+    headers: { "Content-Type": "application/json" },
   });
+
+  if (response.ok) {
+    location.reload();
+  } else {
+    alert(response.statusText);
+  }
+}
 };
 //
 //
